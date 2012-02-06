@@ -4,7 +4,7 @@ require 'omniauth/windowslive/version'
 
 Gem::Specification.new do |s|
   s.name        = "omniauth-windowslive"
-  s.version     = Omniauth::Windowslive::VERSION
+  s.version     = OmniAuth::Windowslive::VERSION
   s.authors     = ["Joel AZEMAR"]
   s.email       = ["joel.azemar@gmail.com"]
   s.homepage    = "https://github.com/joel/omniauth-windowslive"
@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  gem.add_dependency 'omniauth-oauth2', '~> 1.0'
-  gem.add_dependency 'multi_json', '~> 1.0.3'
-  gem.add_development_dependency 'rspec', '~> 2.7'
-  gem.add_development_dependency 'rack-test'
-  gem.add_development_dependency 'webmock'
+  s.add_dependency 'omniauth-oauth2', '~> 1.0'
+  s.add_dependency 'multi_json', '~> 1.0.3'
+  s.add_development_dependency 'rspec', '~> 2.7'
+  s.add_development_dependency 'rack-test'
+  s.add_development_dependency 'webmock'
 end

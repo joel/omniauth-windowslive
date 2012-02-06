@@ -10,21 +10,21 @@ describe OmniAuth::Strategies::Windowslive do
 
   describe '#client' do
     it 'should have the correct Windowslive site' do
-      subject.client.site.should eq("https://launchpad.Windowslive.com")
+      subject.client.site.should eq("https://oauth.live.com")
     end
 
     it 'should have the correct authorization url' do
-      subject.client.options[:authorize_url].should eq("/authorization/new")
+      subject.client.options[:authorize_url].should eq("/authorize")
     end
 
     it 'should have the correct token url' do
-      subject.client.options[:token_url].should eq('/authorization/token')
+      subject.client.options[:token_url].should eq('/token')
     end
   end
 
   describe '#callback_path' do
     it 'should have the correct callback path' do
-      subject.callback_path.should eq('/auth/Windowslive/callback')
+      subject.callback_path.should eq('/auth/windowslive/callback')
     end
   end
 end

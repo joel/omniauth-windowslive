@@ -19,17 +19,13 @@ module OmniAuth
         :response_type => 'token' # 'code'
       }
 
-      option :name, 'Windowslive'
+      option :name, 'windowslive'
 
       def request_phase
         super
       end
 
-      uid do
-        {
-          raw_info.parsed['id']
-        }
-      end
+      uid { raw_info.parsed['id'] }
 
       info do
         {
@@ -56,17 +52,16 @@ module OmniAuth
         # GET https://apis.live.net/v5.0/me?access_token=ACCESS_TOKEN
         # @raw_info ||= MultiJson.decode(access_token.get('/1/account/verify_credentials.json').body)
         access_token.options[:parse] = :json
-        @raw_info ||= access_token.get(request)
+        @raw_info ||= MultiJson.decode(access_token.get(request))
       end
 
       # Contacts http://msdn.microsoft.com/fr-fr/windowslive/hh561464
       def contacts_info
         request = "https://apis.live.net/v5.0/me/contacts" # "?limit=2&offset=3"
-        @contacts_info ||= MultiJson.decode(access_token.get(request).body))
+        @contacts_info ||= MultiJson.decode(access_token.get(request).body)
       end
 
     end
   end
 end
-
 OmniAuth.config.add_camelization 'windowslive', 'WindowsLive'
