@@ -16,52 +16,40 @@ module OmniAuth
       }
 
       option :authorize_params, {
-        :response_type => 'token' # 'code'
+        :response_type => 'code'
       }
 
       option :name, 'windowslive'
 
-      def request_phase
-        super
-      end
+      uid { raw_info['id'] }
 
-      uid { raw_info.parsed['id'] }
-
+      # http://msdn.microsoft.com/en-us/library/hh243648.aspx
       info do
         {
-          'id' => raw_info.parsed['id'],
-          'name' => raw_info.parsed['name'],
-          'first_name' => raw_info.parsed['first_name'],
-          'last_name' => raw_info.parsed['last_name'],
-          'gender' => raw_info.parsed['gender'],
-          'link' => raw_info.parsed['link'],
-          'locale' => raw_info.parsed['locale'],
-          'updated_time' => raw_info.parsed['updated_time']
+          'id' => raw_info['id'],
+          'name' => raw_info['name'],
+          'first_name' => raw_info['first_name'],
+          'last_name' => raw_info['last_name'],
+          'gender' => raw_info['gender'],
+          'link' => raw_info['link'],
+          'locale' => raw_info['locale'],
+          'updated_time' => raw_info['updated_time']
         }
       end
 
       extra do
         {
-          'raw_info' => raw_info.parsed
+          'raw_info' => raw_info
         }
       end
 
       # http://msdn.microsoft.com/en-us/library/hh243649.aspx
       def raw_info
         request = 'https://apis.live.net/v5.0/me'
-        # GET https://apis.live.net/v5.0/me?access_token=ACCESS_TOKEN
-        # @raw_info ||= MultiJson.decode(access_token.get('/1/account/verify_credentials.json').body)
-        access_token.options[:parse] = :json
-        @raw_info ||= MultiJson.decode(access_token.get(request))
-      end
-
-      # Contacts http://msdn.microsoft.com/fr-fr/windowslive/hh561464
-      def contacts_info
-        request = "https://apis.live.net/v5.0/me/contacts" # "?limit=2&offset=3"
-        @contacts_info ||= MultiJson.decode(access_token.get(request).body)
+        @raw_info ||= MultiJson.decode(access_token.get(request).body)
       end
 
     end
   end
 end
-OmniAuth.config.add_camelization 'windowslive', 'WindowsLive'
+OmniAuth.config.add_camelization 'windowslive', 'Windowslive'
