@@ -1,5 +1,6 @@
 require 'omniauth/strategies/oauth2'
 
+# http://msdn.microsoft.com/en-us/library/live/hh243647.aspx
 # http://msdn.microsoft.com/en-us/library/hh243647.aspx
 # http://msdn.microsoft.com/en-us/library/hh243649.aspx
 
@@ -10,9 +11,9 @@ module OmniAuth
       DEFAULT_SCOPE = 'wl.basic,wl.emails,wl.photos'
 
       option :client_options, {
-        :site => 'https://oauth.live.com',
-        :authorize_url => '/authorize',
-        :token_url => '/token'
+        :site => 'https://login.live.com',
+        :authorize_url => '/oauth20_authorize.srf',
+        :token_url => '/oauth20_token.srf'
       }
 
       option :authorize_params, {
