@@ -27,6 +27,7 @@ module OmniAuth
       info do
         {
           'id' => raw_info['id'],
+          'email' => raw_info['emails']['preferred'] || raw_info['emails']['account'],
           'name' => raw_info['name'],
           'first_name' => raw_info['first_name'],
           'last_name' => raw_info['last_name'],
