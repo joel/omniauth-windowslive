@@ -57,30 +57,28 @@ module OmniAuth
         emails_parsed = []
 
         if emails
-          if emails.account
-            emails_parsed << { 'value' =>  emails.account, 'type' => 'account' }
+          if emails['preferred']
+            emails_parsed << { 'value' =>  emails['preferred'], 'type' => 'preferred', 'primary' => true }
           end
 
-          if emails.personal
-            emails_parsed << { 'value' =>  emails.account, 'type' => 'personal' }
+          if emails['account']
+            emails_parsed << { 'value' =>  emails['account'], 'type' => 'account' }
           end
 
-          if emails.business
-            emails_parsed << { 'value' =>  emails.business, 'type' => 'business' }
+          if emails['personal']
+            emails_parsed << { 'value' =>  emails['personal'], 'type' => 'personal' }
           end
 
-          if emails.other
-            emails_parsed << { 'value' =>  emails.other, 'type' => 'other' }
+          if emails['business']
+            emails_parsed << { 'value' =>  emails['business'], 'type' => 'business' }
           end
 
-          if emails.preferred
-            for email in emails_parsed
-                emails_parsed.primary = true if email.value == emails.preferred
-            end
+          if emails['other']
+            emails_parsed << { 'value' =>  emails['other'], 'type' => 'other' }
           end
-
-          emails_parsed
         end
+
+        emails_parsed
       end
     end
   end
