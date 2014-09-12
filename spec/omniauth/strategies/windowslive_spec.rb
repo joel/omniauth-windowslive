@@ -10,15 +10,15 @@ describe OmniAuth::Strategies::Windowslive do
 
   describe '#client' do
     it 'should have the correct Windowslive site' do
-      subject.client.site.should eq("https://oauth.live.com")
+      subject.client.site.should eq("https://login.live.com")
     end
 
     it 'should have the correct authorization url' do
-      subject.client.options[:authorize_url].should eq("/authorize")
+      subject.client.options[:authorize_url].should eq("/oauth20_authorize.srf")
     end
 
     it 'should have the correct token url' do
-      subject.client.options[:token_url].should eq('/token')
+      subject.client.options[:token_url].should eq('/oauth20_token.srf')
     end
   end
 
