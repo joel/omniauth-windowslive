@@ -27,7 +27,7 @@ module OmniAuth
       info do
         {
           'id' => raw_info['id'],
-          'email' => raw_info['emails']['preferred'] || raw_info['emails']['account'],
+          'emails' => emails_parser,
           'name' => raw_info['name'],
           'first_name' => raw_info['first_name'],
           'last_name' => raw_info['last_name'],
@@ -50,7 +50,38 @@ module OmniAuth
         @raw_info ||= MultiJson.decode(access_token.get(request).body)
       end
 
+      private
+
+      def emails_parser
+        emails = raw_info['emails']
+        emails_parsed = []
+
+        if emails
+          if emails['preferred']
+            emails_parsed << { 'value' =>  emails['preferred'], 'type' => 'preferred', 'primary' => true }
+          end
+
+          if emails['account']
+            emails_parsed << { 'value' =>  emails['account'], 'type' => 'account' }
+          end
+
+          if emails['personal']
+            emails_parsed << { 'value' =>  emails['personal'], 'type' => 'personal' }
+          end
+
+          if emails['business']
+            emails_parsed << { 'value' =>  emails['business'], 'type' => 'business' }
+          end
+
+          if emails['other']
+            emails_parsed << { 'value' =>  emails['other'], 'type' => 'other' }
+          end
+        end
+
+        emails_parsed
+      end
     end
   end
 end
+
 OmniAuth.config.add_camelization 'windowslive', 'Windowslive'

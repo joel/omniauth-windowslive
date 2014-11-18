@@ -1,6 +1,14 @@
 # NOTE it would be useful if this lived in omniauth-oauth2 eventually
 
 shared_examples 'an oauth2 strategy' do
+  before do
+    OmniAuth.config.test_mode = true
+  end
+
+  after do
+    OmniAuth.config.test_mode = false
+  end
+
   describe '#client' do
     it 'should be initialized with symbolized client_options' do
       @options = { :client_options => { 'authorize_url' => 'https://example.com' } }
