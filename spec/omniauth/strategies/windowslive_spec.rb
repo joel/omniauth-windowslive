@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'omniauth-Windowslive'
 
 describe OmniAuth::Strategies::Windowslive do
   subject do
