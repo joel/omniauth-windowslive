@@ -10,13 +10,13 @@ module OmniAuth
       DEFAULT_SCOPE = 'wl.basic,wl.emails,wl.photos'
 
       option :client_options, {
-        :site => 'https://login.live.com',
-        :authorize_url => '/oauth20_authorize.srf',
-        :token_url => '/oauth20_token.srf'
+        site:          'https://login.live.com',
+        authorize_url: '/oauth20_authorize.srf',
+        token_url:     '/oauth20_token.srf'
       }
 
       option :authorize_params, {
-        :response_type => 'code'
+        response_type: 'code'
       }
 
       option :name, 'windowslive'
@@ -26,14 +26,14 @@ module OmniAuth
       # http://msdn.microsoft.com/en-us/library/hh243648.aspx
       info do
         {
-          'id' => raw_info['id'],
-          'emails' => emails_parser,
-          'name' => raw_info['name'],
-          'first_name' => raw_info['first_name'],
-          'last_name' => raw_info['last_name'],
-          'gender' => raw_info['gender'],
-          'link' => raw_info['link'],
-          'locale' => raw_info['locale'],
+          'id'           => raw_info['id'],
+          'emails'       => emails_parser,
+          'name'         => raw_info['name'],
+          'first_name'   => raw_info['first_name'],
+          'last_name'    => raw_info['last_name'],
+          'gender'       => raw_info['gender'],
+          'link'         => raw_info['link'],
+          'locale'       => raw_info['locale'],
           'updated_time' => raw_info['updated_time']
         }
       end
