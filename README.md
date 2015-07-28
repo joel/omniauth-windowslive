@@ -11,7 +11,9 @@ This gem contains the unofficial WindowsLive strategy for OmniAuth.
 ## Supported Flows
 
 for create app
-# https://manage.dev.live.com/Applications/Index?wa=wsignin1.0 OR https://manage.dev.live.com/AddApplication.aspx?tou=1
+https://manage.dev.live.com/Applications/Index?wa=wsignin1.0
+OR
+https://manage.dev.live.com/AddApplication.aspx?tou=1
 
 ## Ruby
 
