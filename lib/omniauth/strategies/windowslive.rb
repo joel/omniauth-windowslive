@@ -1,3 +1,4 @@
+require 'uri'
 require 'omniauth/strategies/oauth2'
 
 # http://msdn.microsoft.com/en-us/library/hh243647.aspx
@@ -51,6 +52,12 @@ module OmniAuth
       end
 
       private
+      
+      def build_access_token
+        verifier = request.params["code"]
+        redirect_uri = URI.parse(callback_url).tap { |uri| uri.query = nil }.to_s
+        client.auth_code.get_token(verifier, {:redirect_uri => redirect_uri}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+      end
 
       def emails_parser
         emails = raw_info['emails']
