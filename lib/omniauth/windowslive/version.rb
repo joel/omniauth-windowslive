@@ -1,5 +1,5 @@
 module OmniAuth
   module Windowslive
-    VERSION = "0.0.9.1"
+    VERSION = "0.0.10"
   end
 end
