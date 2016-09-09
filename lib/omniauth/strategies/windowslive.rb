@@ -29,7 +29,7 @@ module OmniAuth
         {
           'id'           => raw_info['id'],
           'emails'       => emails_parser,
-          'email'        => emails.find { |email| email['value'].to_s != '' }['value'],
+          'email'        => emails_parser.find { |email| email['value'].to_s != '' }['value'],
           'name'         => raw_info['name'],
           'first_name'   => raw_info['first_name'],
           'last_name'    => raw_info['last_name'],
