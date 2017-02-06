@@ -40,4 +40,12 @@ describe OmniAuth::Strategies::Windowslive do
       end
     end
   end
+
+  describe '#email' do
+    it 'should provide email from emails hash' do
+      email = 'test@example.com'
+      subject.stub(:raw_info) { {'emails' => {'preferred' => email}} }
+      subject.info['email'].should eq(email)
+    end
+  end
 end
