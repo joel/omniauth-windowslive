@@ -6,5 +6,6 @@ gemspec
 
 group :test do
   gem 'coveralls', require: false
+  gem 'rb-readline'
   gem 'pry'
 end

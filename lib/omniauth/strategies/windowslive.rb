@@ -52,11 +52,14 @@ module OmniAuth
       end
 
       private
-      
+
+      def callback_url
+        URI.parse(super).tap { |uri| uri.query = nil }.to_s
+      end
+
       def build_access_token
-        verifier = request.params["code"]
-        redirect_uri = URI.parse(callback_url).tap { |uri| uri.query = nil }.to_s
-        client.auth_code.get_token(verifier, {:redirect_uri => redirect_uri}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+        verifier = request.params['code']
+        client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       end
 
       def emails_parser

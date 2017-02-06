@@ -18,8 +18,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'omniauth-oauth2', '~> 1.4'
-  s.add_dependency 'multi_json', '>= 1.0.3'
-  s.add_development_dependency 'rspec', '~> 2.7'
+  s.add_dependency 'multi_json', '~> 1.12'
+
+  s.add_development_dependency 'rspec', '~> 3.5'
   s.add_development_dependency 'rack-test'
   s.add_development_dependency 'webmock'
 end
