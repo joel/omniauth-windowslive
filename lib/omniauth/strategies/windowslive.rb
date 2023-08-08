@@ -28,7 +28,6 @@ module OmniAuth
       info do
         {
           'id'           => raw_info['id'],
-          'emails'       => emails_parser,
           'name'         => raw_info['name'],
           'first_name'   => raw_info['first_name'],
           'last_name'    => raw_info['last_name'],
@@ -36,7 +35,7 @@ module OmniAuth
           'link'         => raw_info['link'],
           'locale'       => raw_info['locale'],
           'updated_time' => raw_info['updated_time']
-        }
+        }.merge(self.emails_parser)
       end
 
       extra do
@@ -65,6 +64,7 @@ module OmniAuth
       def emails_parser
         emails = raw_info['emails']
         emails_parsed = []
+        email = nil
 
         if emails
           if emails['preferred']
@@ -72,7 +72,8 @@ module OmniAuth
           end
 
           if emails['account']
-            emails_parsed << { 'value' =>  emails['account'], 'type' => 'account' }
+            email = emails['account']
+            emails_parsed << { 'value' =>  email, 'type' => 'account' }
           end
 
           if emails['personal']
@@ -87,8 +88,7 @@ module OmniAuth
             emails_parsed << { 'value' =>  emails['other'], 'type' => 'other' }
           end
         end
-
-        emails_parsed
+        { 'emails' => emails_parsed, 'email' => email }
       end
     end
   end
